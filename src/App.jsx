@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { CreditCard, Upload } from 'lucide-react';
 import { parseCSV, applyAISuggestedCategories } from './utils/transactions';
 import { suggestNewCategories } from './utils/aiCategoryAnalyzer';
@@ -19,14 +19,6 @@ const App = () => {
   
   // Usar transações com IA se disponível, caso contrário usar transações base
   const finalTransactions = transactionsWithAI.length > 0 ? transactionsWithAI : transactions;
-
-  // Auto-preenchimento da data inicial com a primeira data do CSV
-  useEffect(() => {
-    if (finalTransactions.length > 0) {
-      const firstDate = finalTransactions[0].date;
-      setBillStartDate(firstDate);
-    }
-  }, [finalTransactions]);
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];

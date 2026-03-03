@@ -1,0 +1,12 @@
+name: credit-card-analysis
+services:
+- name: credit-card-analysis
+  github:
+    repo: philippecarvalho/credit-card-analysis
+    branch: master
+  build_command: npm install && npm run build
+  http_port: 3000
+  source_dir: .
+  envs:
+  - key: VITE_GOOGLE_GENERATIVE_AI_KEY
+    scope: RUN_AND_BUILD_TIME

@@ -31,46 +31,46 @@ const ExpenseAnalysis = ({ transactions }) => {
   const totalFood = useMemo(() => getTotalFood(transactions), [transactions]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-gradient-to-br from-red-500 to-red-600 rounded-xl p-6 text-white">
+        <div className="bg-gradient-to-br from-red-500 to-red-600 rounded-xl p-4 md:p-6 text-white">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-red-100 text-sm mb-1">Total de Gastos</p>
-              <p className="text-3xl font-bold">R$ {totalExpenses.toFixed(2)}</p>
+              <p className="text-red-100 text-xs md:text-sm mb-1">Total de Gastos</p>
+              <p className="text-2xl md:text-3xl font-bold">R$ {totalExpenses.toFixed(2)}</p>
             </div>
-            <TrendingUp className="w-12 h-12 opacity-80" />
+            <TrendingUp className="w-8 h-8 md:w-12 md:h-12 opacity-80" />
           </div>
         </div>
-        <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white">
+        <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-4 md:p-6 text-white">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-purple-100 text-sm mb-1">Compras Parceladas</p>
-              <p className="text-3xl font-bold">{installmentPurchases.length}</p>
+              <p className="text-purple-100 text-xs md:text-sm mb-1">Compras Parceladas</p>
+              <p className="text-2xl md:text-3xl font-bold">{installmentPurchases.length}</p>
             </div>
-            <Calendar className="w-12 h-12 opacity-80" />
+            <Calendar className="w-8 h-8 md:w-12 md:h-12 opacity-80" />
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-gray-50 rounded-xl p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Gastos por Categoria</h2>
-          <ResponsiveContainer width="100%" height={300}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
+        <div className="bg-gray-50 rounded-xl p-4 md:p-6">
+          <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-4">Gastos por Categoria</h2>
+          <ResponsiveContainer width="100%" height={250}>
             <PieChart>
-              <Pie data={categoryTotals} cx="50%" cy="50%" labelLine={false} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} outerRadius={100} dataKey="value">
+              <Pie data={categoryTotals} cx="50%" cy="50%" labelLine={false} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} outerRadius={80} dataKey="value">
                 {categoryTotals.map((entry, index) => <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />)}
               </Pie>
               <Tooltip formatter={(value) => `R$ ${value.toFixed(2)}`} />
             </PieChart>
           </ResponsiveContainer>
         </div>
-        <div className="bg-gray-50 rounded-xl p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Ranking de Categorias</h2>
-          <ResponsiveContainer width="100%" height={300}>
+        <div className="bg-gray-50 rounded-xl p-4 md:p-6">
+          <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-4">Ranking de Categorias</h2>
+          <ResponsiveContainer width="100%" height={250}>
             <BarChart data={categoryTotals}>
-              <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-              <YAxis />
+              <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} tick={{fontSize: 11}} />
+              <YAxis tick={{fontSize: 11}} />
               <Tooltip formatter={(value) => `R$ ${value.toFixed(2)}`} />
               <Bar dataKey="value" fill="#3b82f6" />
             </BarChart>
@@ -79,38 +79,38 @@ const ExpenseAnalysis = ({ transactions }) => {
       </div>
 
       {foodSubcategories.length > 0 && (
-        <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-6 border-2 border-red-200">
-          <div className="flex items-center gap-3 mb-6">
-            <UtensilsCrossed className="w-6 h-6 text-red-600" />
-            <h2 className="text-2xl font-bold text-gray-800">Detalhamento: Alimentação</h2>
+        <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-4 md:p-6 border-2 border-red-200">
+          <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
+            <UtensilsCrossed className="w-5 h-5 md:w-6 md:h-6 text-red-600" />
+            <h2 className="text-lg md:text-2xl font-bold text-gray-800">Detalhamento: Alimentação</h2>
           </div>
-          <div className="bg-white rounded-lg p-4 mb-6">
-            <div className="flex justify-between items-center">
-              <span className="text-lg font-semibold text-gray-700">Total em Alimentação</span>
+          <div className="bg-white rounded-lg p-3 md:p-4 mb-4 md:mb-6">
+            <div className="flex justify-between items-center gap-2">
+              <span className="text-sm md:text-lg font-semibold text-gray-700">Total em Alimentação</span>
               <div className="text-right">
-                <p className="text-3xl font-bold text-red-600">R$ {totalFood.toFixed(2)}</p>
-                <p className="text-sm text-gray-500">{((totalFood / totalExpenses) * 100).toFixed(1)}% dos gastos totais</p>
+                <p className="text-xl md:text-3xl font-bold text-red-600">R$ {totalFood.toFixed(2)}</p>
+                <p className="text-xs md:text-sm text-gray-500">{((totalFood / totalExpenses) * 100).toFixed(1)}% dos gastos totais</p>
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            <div className="bg-white rounded-lg p-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Distribuição por Tipo</h3>
-              <ResponsiveContainer width="100%" height={250}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
+            <div className="bg-white rounded-lg p-3 md:p-4">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-3 md:mb-4">Distribuição por Tipo</h3>
+              <ResponsiveContainer width="100%" height={200}>
                 <PieChart>
-                  <Pie data={foodSubcategories} cx="50%" cy="50%" labelLine={false} label={({ name, percent }) => `${name.split(' ')[0]} ${(percent * 100).toFixed(0)}%`} outerRadius={80} dataKey="value">
+                  <Pie data={foodSubcategories} cx="50%" cy="50%" labelLine={false} label={({ name, percent }) => `${name.split(' ')[0]} ${(percent * 100).toFixed(0)}%`} outerRadius={60} dataKey="value">
                     {foodSubcategories.map((entry, index) => <Cell key={`cell-${index}`} fill={foodColors[index % foodColors.length]} />)}
                   </Pie>
                   <Tooltip formatter={(value) => `R$ ${value.toFixed(2)}`} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="bg-white rounded-lg p-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Valores por Subcategoria</h3>
-              <ResponsiveContainer width="100%" height={250}>
+            <div className="bg-white rounded-lg p-3 md:p-4">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-3 md:mb-4">Valores por Subcategoria</h3>
+              <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={foodSubcategories} layout="vertical">
-                  <XAxis type="number" />
-                  <YAxis dataKey="name" type="category" width={120} />
+                  <XAxis type="number" tick={{fontSize: 11}} />
+                  <YAxis dataKey="name" type="category" width={80} tick={{fontSize: 10}} />
                   <Tooltip formatter={(value) => `R$ ${value.toFixed(2)}`} />
                   <Bar dataKey="value" fill="#ef4444" />
                 </BarChart>

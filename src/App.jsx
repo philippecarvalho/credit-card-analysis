@@ -68,20 +68,20 @@ const App = () => {
       <div className="max-w-7xl mx-auto">
         {/* Upload Instructions Banner */}
         {showUploadInstructions && (
-          <div className="bg-blue-600 text-white rounded-2xl shadow-xl p-6 mb-6">
-            <div className="flex items-start gap-4">
-              <Upload className="w-8 h-8 flex-shrink-0 mt-1" />
+          <div className="bg-blue-600 text-white rounded-2xl shadow-xl p-4 md:p-6 mb-4 md:mb-6">
+            <div className="flex items-start gap-3 md:gap-4">
+              <Upload className="w-6 h-6 md:w-8 md:h-8 flex-shrink-0 mt-1" />
               <div>
-                <h2 className="text-2xl font-bold mb-3">Como usar este analisador</h2>
-                <div className="space-y-2 text-blue-50">
+                <h2 className="text-xl md:text-2xl font-bold mb-3">Como usar este analisador</h2>
+                <div className="space-y-2 text-blue-50 text-sm md:text-base">
                   <p><strong>1.</strong> Exporte sua fatura do cartão em formato CSV com as colunas: date, title, amount</p>
                   <p><strong>2.</strong> Use o botão abaixo para carregar seu arquivo CSV</p>
                   <p><strong>3.</strong> O analisador vai categorizar automaticamente seus gastos e ajudar no planejamento</p>
-                  <p className="text-sm mt-4">💡 <strong>Dica:</strong> Os dados estão seguros - tudo é processado localmente no seu navegador, nada é enviado para servidores externos.</p>
+                  <p className="text-xs md:text-sm mt-4">Dica: Os dados estão seguros - tudo é processado localmente no seu navegador, nada é enviado para servidores externos.</p>
                 </div>
                 <label className="mt-4 inline-block">
                   <input type="file" accept=".csv" onChange={handleFileUpload} className="hidden" />
-                  <span className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold cursor-pointer hover:bg-blue-50 transition inline-block">📁 Carregar Meu CSV</span>
+                  <span className="bg-white text-blue-600 px-4 md:px-6 py-2 md:py-3 rounded-lg font-semibold cursor-pointer hover:bg-blue-50 transition inline-block text-sm md:text-base">Carregar Meu CSV</span>
                 </label>
               </div>
             </div>
@@ -89,29 +89,29 @@ const App = () => {
         )}
 
         {/* Main Content */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-white rounded-2xl shadow-xl p-4 md:p-8">
           {/* Header */}
-          <div className="flex items-center justify-between mb-8 pb-6 border-b-2 border-gray-200">
-            <div className="flex items-center gap-3">
-              <CreditCard className="w-8 h-8 text-blue-600" />
-              <h1 className="text-3xl font-bold text-gray-800">Análise da Fatura do Cartão</h1>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 md:mb-8 pb-4 md:pb-6 border-b-2 border-gray-200">
+            <div className="flex items-center gap-2 md:gap-3">
+              <CreditCard className="w-6 h-6 md:w-8 md:h-8 text-blue-600" />
+              <h1 className="text-xl md:text-3xl font-bold text-gray-800">Análise da Fatura do Cartão</h1>
             </div>
             {!showUploadInstructions && (
               <label>
                 <input type="file" accept=".csv" onChange={handleFileUpload} className="hidden" />
-                <span className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer hover:bg-blue-700 transition inline-flex items-center gap-2">
-                  <Upload className="w-4 h-4" /> Carregar Novo CSV
+                <span className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold cursor-pointer hover:bg-blue-700 transition inline-flex items-center gap-2 text-sm">
+                  <Upload className="w-4 h-4" /> Carregar
                 </span>
               </label>
             )}
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-2 mb-8 border-b border-gray-200">
+          <div className="flex gap-1 md:gap-2 mb-6 md:mb-8 border-b border-gray-200 overflow-x-auto">
             <button
               onClick={() => setActiveTab('analysis')}
               disabled={isLoadingCategories}
-              className={`px-6 py-3 font-semibold transition border-b-2 ${
+              className={`px-3 md:px-6 py-2 md:py-3 font-semibold transition border-b-2 whitespace-nowrap ${
                 isLoadingCategories ? 'opacity-50 cursor-not-allowed' : ''
               } ${
                 activeTab === 'analysis'
@@ -119,12 +119,12 @@ const App = () => {
                   : 'text-gray-600 border-transparent hover:text-gray-800'
               }`}
             >
-              📊 Análise de Gastos
+              Análise de Gastos
             </button>
             <button
               onClick={() => setActiveTab('planning')}
               disabled={isLoadingCategories}
-              className={`px-6 py-3 font-semibold transition border-b-2 ${
+              className={`px-3 md:px-6 py-2 md:py-3 font-semibold transition border-b-2 whitespace-nowrap ${
                 isLoadingCategories ? 'opacity-50 cursor-not-allowed' : ''
               } ${
                 activeTab === 'planning'
@@ -132,7 +132,7 @@ const App = () => {
                   : 'text-gray-600 border-transparent hover:text-gray-800'
               }`}
             >
-              🎯 Planejar Fatura
+              Planejar Fatura
             </button>
           </div>
 

@@ -58,10 +58,10 @@ const BudgetPlanning = ({
 
   return (
     <div className="space-y-6">
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Planejamento de Fatura</h2>
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 md:p-6 border-2 border-blue-200">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">Planejamento de Fatura</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6 md:mb-8">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               <Calendar className="w-4 h-4 inline mr-2" />
@@ -108,7 +108,7 @@ const BudgetPlanning = ({
         {budgetCalculations && (
           <div className="space-y-6">
             {/* Budget Overview Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
               <div className="bg-white rounded-lg p-4 border-l-4 border-blue-500">
                 <p className="text-gray-600 text-sm mb-1">Meta de Gasto</p>
                 <p className="text-2xl font-bold text-blue-600">R$ {budgetCalculations.budgetValue.toFixed(2)}</p>
@@ -136,15 +136,15 @@ const BudgetPlanning = ({
             </div>
 
             {/* Daily Spending Limit - Main Focus */}
-            <div className={`rounded-xl p-8 text-center ${budgetCalculations.dailyLimit >= 0 ? 'bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300' : 'bg-gradient-to-br from-red-50 to-rose-50 border-2 border-red-300'}`}>
+            <div className={`rounded-xl p-4 md:p-8 text-center ${budgetCalculations.dailyLimit >= 0 ? 'bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300' : 'bg-gradient-to-br from-red-50 to-rose-50 border-2 border-red-300'}`}>
               <div className="flex items-center justify-center gap-2 mb-3">
-                <TrendingDown className="w-6 h-6 text-gray-700" />
-                <h3 className="text-xl font-bold text-gray-800">Gasto Diário Permitido</h3>
+                <TrendingDown className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+                <h3 className="text-lg md:text-xl font-bold text-gray-800">Gasto Diário Permitido</h3>
               </div>
-              <p className={`text-5xl font-bold mb-2 ${getDailyLimitColor(budgetCalculations.dailyLimit)}`}>
+              <p className={`text-3xl md:text-5xl font-bold mb-2 ${getDailyLimitColor(budgetCalculations.dailyLimit)}`}>
                 R$ {Math.max(0, budgetCalculations.dailyLimit).toFixed(2)}
               </p>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-xs md:text-sm">
                 {budgetCalculations.dailyLimit >= 0 
                   ? `Você pode gastar até R$ ${budgetCalculations.dailyLimit.toFixed(2)} por dia até ${billEndDate}`
                   : `⚠️ Você já ultrapassou o orçamento em R$ ${Math.abs(budgetCalculations.remainingBudget).toFixed(2)}`
@@ -154,7 +154,7 @@ const BudgetPlanning = ({
 
             {/* Budget Status Indicator */}
             {budgetCalculations && (
-              <div className="bg-white rounded-lg p-6 border-2 border-gray-200">
+              <div className="bg-white rounded-lg p-4 md:p-6 border-2 border-gray-200">
                 <h3 className="text-lg font-bold text-gray-800 mb-4">Status do Orçamento</h3>
                 
                 {/* Progress Bar */}
